@@ -11,12 +11,14 @@ package com.dunky.see1;
 import com.dunky.see1.publisher.PublisherImpl;
 import com.dunky.see1.subscriber.SubscriberImpl;
 
+import java.time.Duration;
+
 public class Demo {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         demo1();
     }
 
-    private static void demo1() {
+    private static void demo1() throws InterruptedException {
         // 1. Create a Publisher
         var publisher = new PublisherImpl();
 
@@ -28,7 +30,15 @@ public class Demo {
 
         // 4. Request data from the Publisher
         subscriber.getSubscription().request(10); // Request 10 items
-
+        Thread.sleep(Duration.ofSeconds(2).toMillis()); // Simulate some delay
+        subscriber.getSubscription().request(10); // Request 10 items
+        Thread.sleep(Duration.ofSeconds(2).toMillis()); // Simulate some delay
+        subscriber.getSubscription().request(10); // Request 10 items
+        Thread.sleep(Duration.ofSeconds(2).toMillis()); // Simulate some delay
+        subscriber.getSubscription().request(10); // Request 10 items
+        Thread.sleep(Duration.ofSeconds(2).toMillis()); // Simulate some delay
+        subscriber.getSubscription().request(10); // Request 10 items
+        Thread.sleep(Duration.ofSeconds(2).toMillis()); // Simulate some delay
         // Optionally, you can cancel the subscription after some time
         // subscriber.getSubscription().cancel();
     }
