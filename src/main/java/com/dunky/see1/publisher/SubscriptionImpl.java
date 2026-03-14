@@ -28,6 +28,9 @@ public class SubscriptionImpl implements Subscription {
             return;
         }
         log.info("Requesting {} items.", requested);
+        if (requested > MAX_DATA) {
+            this.subscriber.onError(new RuntimeException("Requested items exceed the maximum limit of " + MAX_DATA));
+        }
         // Here you would typically fetch data and call subscriber.onNext() for each item,
         // and then call subscriber.onComplete() when done.
         for (int i = 0; i < requested && count < MAX_DATA; i++) {

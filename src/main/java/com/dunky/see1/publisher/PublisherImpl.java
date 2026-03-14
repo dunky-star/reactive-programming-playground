@@ -9,8 +9,5 @@ public class PublisherImpl implements Publisher<String> {
         // 1. Create a Subscription and pass it to the Subscriber
         SubscriptionImpl subscription = new SubscriptionImpl(subscriber);
         subscriber.onSubscribe(subscription);
-
-        // 2. Publish data to the Subscriber
-
     }
 }
