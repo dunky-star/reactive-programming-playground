@@ -30,6 +30,8 @@ public class SubscriptionImpl implements Subscription {
         log.info("Requesting {} items.", requested);
         if (requested > MAX_DATA) {
             this.subscriber.onError(new RuntimeException("Requested items exceed the maximum limit of " + MAX_DATA));
+            isCancelled = true; // Mark as cancelled to prevent further requests
+            return;
         }
         // Here you would typically fetch data and call subscriber.onNext() for each item,
         // and then call subscriber.onComplete() when done.

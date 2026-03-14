@@ -29,7 +29,7 @@ public class Demo {
         publisher.subscribe(subscriber);
 
         // 4. Request data from the Publisher
-        subscriber.getSubscription().request(50); // Request 10 items
+        subscriber.getSubscription().request(50); // Request 50 items
         Thread.sleep(Duration.ofSeconds(2).toMillis()); // Simulate some delay
         subscriber.getSubscription().request(10); // Request 10 items
         Thread.sleep(Duration.ofSeconds(2).toMillis()); // Simulate some delay
@@ -37,8 +37,9 @@ public class Demo {
         Thread.sleep(Duration.ofSeconds(2).toMillis()); // Simulate some delay
         subscriber.getSubscription().request(10); // Request 10 items
         Thread.sleep(Duration.ofSeconds(2).toMillis()); // Simulate some delay
-        subscriber.getSubscription().request(30); // Request 10 items
+        subscriber.getSubscription().request(30); // Request 30 items
         Thread.sleep(Duration.ofSeconds(2).toMillis()); // Simulate some delay
+        subscriber.getSubscription().request(30); // Request 30 items
         // Optionally, you can cancel the subscription after some time
         // subscriber.getSubscription().cancel();
     }
