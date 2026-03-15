@@ -6,18 +6,24 @@ import org.slf4j.LoggerFactory;
 import reactor.core.publisher.Mono;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 public class See2MonoEmptyError {
 
     private static final Logger log = LoggerFactory.getLogger(See2MonoEmptyError.class);
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         getUsername(1)
                 .subscribe(Util.subscriber());
 
         var list = List.of(10, 215, 3, 455, 555, 105, 206, 100, 1000);
-        Mono.fromSupplier(() -> sum(list))
+        Mono.fromCallable(() -> sum(list))
                 .subscribe(Util.subscriber());
+
+        Mono.fromFuture(getNameAsync())
+                .subscribe(Util.subscriber());
+
+        Util.sleepSeconds(2);
     }
 
     private static Mono<String> getUsername(int userId) {
@@ -32,5 +38,12 @@ public class See2MonoEmptyError {
     private static int sum(List<Integer> list) {
         log.info("Finding the sum: {}", list);
         return list.stream().mapToInt(Integer::intValue).sum();
+    }
+
+    private static CompletableFuture<String> getNameAsync() {
+        return CompletableFuture.supplyAsync(() -> {
+           log.info("Finding the username");
+           return Util.faker().name().username();
+        });
     }
 }
