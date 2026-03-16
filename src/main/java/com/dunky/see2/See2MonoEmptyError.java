@@ -20,7 +20,7 @@ public class See2MonoEmptyError {
         Mono.fromCallable(() -> sum(list))
                 .subscribe(Util.subscriber());
 
-        Mono.fromFuture(getNameAsync())
+        Mono.fromFuture(() -> getNameAsync())
                 .subscribe(Util.subscriber());
 
         Util.sleepSeconds(2);
